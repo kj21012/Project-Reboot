@@ -1,10 +1,8 @@
 from kivy.app import App
-from kivy.uix.widget import Widget
-
-from kivy.app import App
 from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+
 
 class MainWindow(Screen):
     
@@ -28,10 +26,9 @@ Builder.load_string("""
 WindowManager:
     MainWindow:
         id: 'main'
-        name: 'main'
     SecondWindow:
         id: 'second'
-        name: 'second'
+        
 <MainWindow>:
     name: "main"
     # Anchor Layout 1 
@@ -44,7 +41,7 @@ WindowManager:
         # creating Canvas  
         canvas: 
             Color: 
-                rgb: [.5, .324, .384] 
+                rgb: [1, 1, 1] 
             Rectangle: 
                 pos: self.pos 
                 size: self.size

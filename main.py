@@ -4,15 +4,16 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 
-class MainWindow(Screen):
+class SplashScreen(Screen):
     
     def on_enter(self):
         Clock.schedule_once(self.switch, 3)
 
     def switch(self, *args):
-        self.manager.current = "second"
+        self.manager.current = "login"
 
-
+class LoginScreen(Screen):
+    pass
 class SecondWindow(Screen):
     pass
 
@@ -24,12 +25,13 @@ Builder.load_string("""
 #:kivy 1.11.0
            
 WindowManager:
-    MainWindow:
+    SplashScreen:
         id: 'main'
     SecondWindow:
         id: 'second'
-        
-<MainWindow>:
+    LoginScreen:
+        id: 'login'
+<SplashScreen>:
     name: "main"
     # Anchor Layout 1 
     AnchorLayout: 
@@ -53,16 +55,26 @@ WindowManager:
     Button:
         text: "Go Back"
         on_release:
-            root.manager.current = "main"
+            root.manager.current = "login"
             root.manager.transition.direction = "right"
+
+<LoginScreen>:
+    name: "login"
+    
+    Button:
+        text: "Login screen"
+        on_release:
+            root.manager.current = "main"
+            root.manager.transition.direction = "left"
 """)
 
 
 sm = WindowManager()
 screens = [Screen(name='Title {}'.format(i)) for i in range(3)]
-sm.add_widget(MainWindow(name='main'))
+sm.add_widget(SplashScreen(name='main'))
+sm.add_widget(LoginScreen(name='login'))
 sm.add_widget(SecondWindow(name='second'))
-# later
+
 
 
 class mainApp(App):
